@@ -1,26 +1,26 @@
 # TODO code
-A simulation_bringup_line_follow a saját páyán fusson
+*A simulation_bringup_line_follow a saját páyán fusson
 
-Kipróbál, hogy ezt tudja e követni az eredeti NN
+*Kipróbál, hogy ezt tudja e követni az eredeti NN
 
-Az NN változtatása, hogy 4 helyett 7 mappával dolgozzon és két kimenete legyen és tanítás
+*Az NN változtatása, hogy 4 helyett 7 mappával dolgozzon és két kimenete legyen és tanítás
 
-Az line_follower_cnn átírása, hogy a frissített NN-t tudja kezelni (első körben 2 szín alapján sebesség nem feltétlen kell)
+*Az line_follower_cnn átírása, hogy a frissített NN-t tudja kezelni (első körben 2 szín alapján sebesség nem feltétlen kell)
 
-RVIZ-ben a szín felsmerés alapján színezni a megtett utat.
+*RVIZ-ben a szín felsmerés alapján színezni a megtett utat.
 
-A projekt lecsupaszítása -> fölösleges launch fileok és stb töröl
+*A projekt lecsupaszítása -> fölösleges launch fileok és stb töröl
 
 # TODO readme
-projekt dependenciák listázása
+*projekt dependenciák listázása
 
-high level működése leírása (rviz, szín alapú sebesség)
+*high level működése leírása (rviz, szín alapú sebesség)
 
-készített páyák bemutatása
+*készített páyák bemutatása
 
-saját package leírása
+*saját package leírása
 
-NN leírása
+*NN leírása
 
 
 
