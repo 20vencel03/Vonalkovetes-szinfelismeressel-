@@ -29,8 +29,8 @@ session = InteractiveSession(config=config)
 
 # Fix every random seed to make the training reproducible
 seed(1)
-set_seed(2)
-random.seed(42)
+set_seed(1)
+random.seed(4)
 
 print("[INFO] Version:")
 print("Tensorflow version: %s" % tf.__version__)
@@ -50,15 +50,24 @@ def build_LeNet(width, height, depth, classes):
     model.add(Activation("relu"))
     model.add(MaxPooling2D(pool_size=(2, 2), strides=(2, 2)))
 
+    # Optional Dropout after first pool (small value)
+    #model.add(Dropout(0.25))
+
     # second set of CONV => RELU => POOL layers
     model.add(Conv2D(50, (5, 5), padding="same"))
     model.add(Activation("relu"))
     model.add(MaxPooling2D(pool_size=(2, 2), strides=(2, 2)))
 
+    # Optional Dropout again
+    #model.add(Dropout(0.25))
+
     # first (and only) set of FC => RELU layers
     model.add(Flatten())
     model.add(Dense(500))
     model.add(Activation("relu"))
+
+    # Dropout after fully connected (higher value)
+    #model.add(Dropout(0.5))
 
     # softmax classifier
     model.add(Dense(classes))
@@ -94,8 +103,14 @@ for imagePath in imagePaths:
         label = 1
     elif label == 'left':
         label = 2
-    else:
+    elif label == 'nothing':
         label = 3
+    elif label == 'red':
+        label = 4
+    elif label == 'yellow':
+        label = 5    
+    else: #label == blue
+        label = 6
     labels.append(label)
     
     
@@ -106,8 +121,8 @@ labels = np.array(labels)
 # partition the data into training and testing splits using 75% of
 # the data for training and the remaining 25% for testing
 (trainX, testX, trainY, testY) = train_test_split(data, labels, test_size=0.25, random_state=42)# convert the labels from integers to vectors
-trainY = to_categorical(trainY, num_classes=4)
-testY = to_categorical(testY, num_classes=4)
+trainY = to_categorical(trainY, num_classes=7)
+testY = to_categorical(testY, num_classes=7)
 
 
 # initialize the number of epochs to train for, initial learning rate,
@@ -118,7 +133,7 @@ BS      = 32
 
 # initialize the model
 print("[INFO] compiling model...")
-model = build_LeNet(width=image_size, height=image_size, depth=3, classes=4)
+model = build_LeNet(width=image_size, height=image_size, depth=3, classes=7)
 opt = Adam(learning_rate=INIT_LR)
 model.compile(loss="binary_crossentropy", optimizer=opt, metrics=["accuracy"])
  
