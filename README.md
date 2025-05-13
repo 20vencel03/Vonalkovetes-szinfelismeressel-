@@ -9,7 +9,7 @@
 
 *RVIZ-ben a szín felsmerés alapján színezni a megtett utat.
 
-*A projekt lecsupaszítása -> fölösleges launch fileok és stb töröl (ide elkezdem gyűjteni neveket csak)
+*A projekt lecsupaszítása -> fölösleges launch fileok és stb töröl (ide elkezdem gyűjteni neveket csak, a végén csináljuk szerintem csak)
 
 **robot_ -os launch fileok 3db
 
