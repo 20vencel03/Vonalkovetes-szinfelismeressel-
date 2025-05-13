@@ -143,7 +143,7 @@ class ImageSubscriber(Node):
         image = image.reshape(-1, self.image_size, self.image_size, 3)
         
         with tf.device('/gpu:0'):
-            prediction = np.argmax(self.model(image, training=False))
+            prediction = np.argmax(self.model(image, training=False)) ##TODO Ezt kell ketté szedni irányra és színre
 
         # Get the feature maps for the input image
         activations_1 = self.activation_model_1.predict(image)
@@ -155,7 +155,8 @@ class ImageSubscriber(Node):
         print("Prediction %d, elapsed time %.3f" % (prediction, time.time()-self.last_time))
         self.last_time = time.time()
 
-        if prediction == 0: # Forward
+        ##TODO alábbi struktúránk kell színtől függőnek lennie
+        if prediction == 0: # Forward 
             msg.angular.z = 0.0
             msg.linear.x = 0.08
         elif prediction == 1: # Left
