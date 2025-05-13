@@ -42,7 +42,7 @@ def generate_launch_description():
     )
 
     x_pose_arg = DeclareLaunchArgument(
-        'x_pose', default_value='0.0',
+        'x_pose', default_value='1.0',
         description='x coordinate of spawned robot'
     )
 
@@ -62,7 +62,7 @@ def generate_launch_description():
     )
 
     world_arg = DeclareLaunchArgument(
-        'world', default_value='own_background.sdf',
+        'world', default_value='colorful_line_v2.sdf',
         description='Name of the Gazebo world file to load'
     )
 
