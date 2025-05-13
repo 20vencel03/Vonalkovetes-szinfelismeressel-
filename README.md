@@ -1,3 +1,7 @@
+# TODO
+RVIZ-ben a szín felsmerés alapján színezni a megtett utat.
+
+
 # Vonalkovetes-szinfelismeressel-
 Vonalkövetés színfelismeréssel turtlebottal és neurális hálóval / BME Mechatronika MSc Kognitív Robotika tárgya
 
