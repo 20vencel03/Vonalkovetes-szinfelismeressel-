@@ -169,17 +169,29 @@ class ImageSubscriber(Node):
         #print("Prediction %d, elapsed time %.3f" % (prediction_direction, time.time()-self.last_time))
         self.last_time = time.time()
 
+        if  prediction_color == 0: # Red
+            speed_coeff = 0.2
+        elif prediction_color == 1: # Yellow
+            speed_coeff = 1
+        elif prediction_color == 2: # Blue
+            speed_coeff= 2
+        else:
+            speed_coeff = 0.0
+
+        #speed_coeff = 1
+
+
         if prediction_direction == 0: # Forward
             msg.angular.z = 0.0
-            msg.linear.x = 0.08
+            msg.linear.x = 0.08 * speed_coeff
 
         elif prediction_direction == 1: # Left
             msg.angular.z = -0.3
-            msg.linear.x = 0.05
+            msg.linear.x = 0.05 * speed_coeff
 
         elif prediction_direction == 2: # Right
             msg.angular.z = 0.3
-            msg.linear.x = 0.05
+            msg.linear.x = 0.05 * speed_coeff
 
         else: # Nothing
             msg.angular.z = 0.2
@@ -189,11 +201,6 @@ class ImageSubscriber(Node):
 
         # Publish cmd_vel
         self.publisher.publish(msg)
-
-        # Simulate color output (0: Yellow, 1: Red, 2: Blue)
-        # Replace this with your model's actual color output in the future
-        # placeholder for yellow, change this as needed
-        #predicted_color = 2 #TODO TEMP
 
         color_msg = Int32()
         color_msg.data = int(prediction_color)
