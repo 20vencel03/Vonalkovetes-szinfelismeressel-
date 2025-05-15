@@ -62,7 +62,7 @@ def generate_launch_description():
     )
 
     world_arg = DeclareLaunchArgument(
-        'world', default_value='colorful_line_v2.sdf',
+        'world', default_value='world_pebbled.sdf',
         description='Name of the Gazebo world file to load'
     )
 
