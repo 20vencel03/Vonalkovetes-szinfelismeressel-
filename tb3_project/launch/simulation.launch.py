@@ -131,6 +131,18 @@ def generate_launch_description():
         name='mogi_trajectory_server',
     )
 
+    path_marker_node = Node(
+        package='tb3_project_py',
+        executable='path_marker',
+        name='path_marker',
+    )
+
+    line_follower_node = Node(
+        package='tb3_project_py',
+        executable='line_follower_cnn',
+        name='line_follower_cnn',
+    )
+
     ld = LaunchDescription()
 
     # Add the commands to the launch description
@@ -148,5 +160,8 @@ def generate_launch_description():
     ld.add_action(spawn_turtlebot_cmd)
     ld.add_action(rviz_node)
     ld.add_action(trajectory_node)
+
+    ld.add_action(path_marker_node)
+    # ld.add_action(line_follower_node)
 
     return ld

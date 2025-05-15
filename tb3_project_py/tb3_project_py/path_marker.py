@@ -54,7 +54,7 @@ class PathVisualizer(Node):
         self.marker.lifetime = Duration(sec=0)
 
     def color_callback(self, msg: Int32):
-        self.get_logger().info(f"Received new color ID: {msg.data}")
+        #self.get_logger().info(f"Received new color ID: {msg.data}")
         self.current_color_id = msg.data
 
     def get_color(self, color_id: int) -> ColorRGBA:
