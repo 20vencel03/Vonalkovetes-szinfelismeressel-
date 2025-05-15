@@ -26,6 +26,7 @@ setup(
             'save_training_images = tb3_project_py.save_training_images:main',
             'line_follower_cnn = tb3_project_py.line_follower_cnn:main',
             'line_follower_cnn_robot = tb3_project_py.line_follower_cnn_robot:main',
+            'path_marker = tb3_project_py.path_marker:main',
         ],
     },
 )
