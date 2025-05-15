@@ -3,6 +3,7 @@ from rclpy.node import Node
 from sensor_msgs.msg import CompressedImage, Image
 from cv_bridge import CvBridge
 from geometry_msgs.msg import Twist
+from std_msgs.msg import Int32
 from ament_index_python.packages import get_package_share_directory
 
 from tensorflow.keras.preprocessing.image import img_to_array
@@ -69,7 +70,9 @@ class ImageSubscriber(Node):
         )
 
         self.publisher = self.create_publisher(Twist, 'cmd_vel', 10)
-        
+
+        self.color_publisher = self.create_publisher(Int32, 'line_color', 10)
+
         # Initialize CvBridge
         self.bridge = CvBridge()
         
@@ -159,18 +162,42 @@ class ImageSubscriber(Node):
         if prediction == 0: # Forward 
             msg.angular.z = 0.0
             msg.linear.x = 0.08
+
+            predicted_color = 0 #TODO TEMP
+
         elif prediction == 1: # Left
             msg.angular.z = -0.3
             msg.linear.x = 0.05
+
+            predicted_color = 1 #TODO TEMP
+
         elif prediction == 2: # Right
             msg.angular.z = 0.3
             msg.linear.x = 0.05
+
+            predicted_color = 2 #TODO TEMP
+
+
         else: # Nothing
             msg.angular.z = 0.2
             msg.linear.x = 0.0
 
+            predicted_color = 1 #TODO TEMP
+
         # Publish cmd_vel
         self.publisher.publish(msg)
+
+        # Simulate color output (0: Yellow, 1: Red, 2: Blue)
+        # Replace this with your model's actual color output in the future
+        # placeholder for yellow, change this as needed
+        #predicted_color = 2 #TODO TEMP
+
+        color_msg = Int32()
+        color_msg.data = predicted_color
+        self.color_publisher.publish(color_msg)
+
+        color_names = ["Yellow", "Red", "Blue"]
+        print(f"Predicted direction: {prediction}, color: {color_names[predicted_color]}")
 
         # Return processed frames
         return grid_image_1, grid_image_2
