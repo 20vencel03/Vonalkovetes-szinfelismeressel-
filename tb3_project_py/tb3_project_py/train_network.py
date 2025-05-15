@@ -71,7 +71,7 @@ def build_LeNet(width, height, depth, classes):
 
     # softmax classifier
     model.add(Dense(classes))
-    model.add(Activation("softmax"))
+    model.add(Activation("sigmoid"))
 
     # return the constructed network architecture
     return model
@@ -109,7 +109,7 @@ for imagePath in imagePaths:
         label = 4
     elif label == 'yellow':
         label = 5    
-    else: #label == blue
+    elif label == 'blue':
         label = 6
     labels.append(label)
     

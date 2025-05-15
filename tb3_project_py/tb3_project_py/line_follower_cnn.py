@@ -143,7 +143,20 @@ class ImageSubscriber(Node):
         image = image.reshape(-1, self.image_size, self.image_size, 3)
         
         with tf.device('/gpu:0'):
-            prediction = np.argmax(self.model(image, training=False)) ##TODO Ezt kell ketté szedni irányra és színre
+            prediction_all = (self.model(image, training=False))
+
+
+            #print(prediction_all)
+
+            prediction_direction = np.argmax(prediction_all[0][0:4])
+            prediction_color = np.argmax(prediction_all[0][4:7])
+
+            print(prediction_direction,
+            prediction_color)
+
+
+
+
 
         # Get the feature maps for the input image
         activations_1 = self.activation_model_1.predict(image)
@@ -152,17 +165,16 @@ class ImageSubscriber(Node):
         grid_image_1 = self.visualize_feature_maps(activations_1, num_rows=5, num_cols=10, padding=1)
         grid_image_2 = self.visualize_feature_maps(activations_2, num_rows=5, num_cols=10, padding=1)
 
-        print("Prediction %d, elapsed time %.3f" % (prediction, time.time()-self.last_time))
+        #print("Prediction %d, elapsed time %.3f" % (prediction_direction, time.time()-self.last_time))
         self.last_time = time.time()
 
-        ##TODO alábbi struktúránk kell színtől függőnek lennie
-        if prediction == 0: # Forward 
+        if prediction_direction == 0: # Forward
             msg.angular.z = 0.0
             msg.linear.x = 0.08
-        elif prediction == 1: # Left
+        elif prediction_direction == 1: # Left
             msg.angular.z = -0.3
             msg.linear.x = 0.05
-        elif prediction == 2: # Right
+        elif prediction_direction == 2: # Right
             msg.angular.z = 0.3
             msg.linear.x = 0.05
         else: # Nothing
@@ -170,7 +182,7 @@ class ImageSubscriber(Node):
             msg.linear.x = 0.0
 
         # Publish cmd_vel
-        self.publisher.publish(msg)
+        #self.publisher.publish(msg)
 
         # Return processed frames
         return grid_image_1, grid_image_2
