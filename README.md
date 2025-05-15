@@ -32,15 +32,23 @@ Valódi robot vagy szimuláció megvalósítása.
 
 
 # Készített pályák
+Különböző színű és szélességű pályákat készítettünk.
+A robotnak RViz-ben ki kell rajzolnia a bejárt pályát és a pályaszakaszok színeit.
+A pályák eltérnelk szélességükben, van amelyik rendelkezik éllel. A pályák színezése során piros, kék és sárga színeket használtunk.
 
 
 # Projekt felépítése
 ## Struktúra
+A ./Tracks mappa tartalmazza a pályáka, amiken a robotnak végig kell mennie. 
+A ./tb3_project 
+
 ## Dependenciák
 ## Működés
 ## Vizulizáció
 
 # Neurális Háló
+
+
 
 # Eredmények
 "videó"
