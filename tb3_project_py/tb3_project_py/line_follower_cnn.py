@@ -178,7 +178,7 @@ class ImageSubscriber(Node):
         else:
             speed_coeff = 0.0
 
-        #speed_coeff = 1
+        speed_coeff = 1
 
 
         if prediction_direction == 0: # Forward

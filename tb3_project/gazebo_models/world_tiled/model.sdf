@@ -24,7 +24,7 @@
         <geometry>
           <mesh>
             <uri>model://world_tiled/meshes/world_tiled.dae</uri>
-            <scale>1 1 1</scale>
+            <scale>1 1 0.1</scale>
           </mesh>
         </geometry>
         <transparency>0</transparency>
@@ -37,7 +37,7 @@
         <geometry>
           <mesh>
             <uri>model://world_tiled/meshes/world_tiled.dae</uri>
-            <scale>1 1 1</scale>
+            <scale>1 1 0.1</scale>
           </mesh>
         </geometry>
         <surface>

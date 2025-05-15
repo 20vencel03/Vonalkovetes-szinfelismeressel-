@@ -49,7 +49,7 @@ class PathVisualizer(Node):
         self.marker.id = 0
         self.marker.type = Marker.LINE_LIST  # <-- Important change
         self.marker.action = Marker.ADD
-        self.marker.scale.x = 0.005
+        self.marker.scale.x = 0.01
         self.marker.pose.orientation.w = 1.0
         self.marker.lifetime = Duration(sec=0)
 
