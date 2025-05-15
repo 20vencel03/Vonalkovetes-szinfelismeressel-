@@ -159,8 +159,6 @@ class ImageSubscriber(Node):
 
 
 
-
-
         # Get the feature maps for the input image
         activations_1 = self.activation_model_1.predict(image)
         activations_2 = self.activation_model_2.predict(image)
@@ -175,29 +173,22 @@ class ImageSubscriber(Node):
             msg.angular.z = 0.0
             msg.linear.x = 0.08
 
-            predicted_color = 0 #TODO TEMP
-
-        elif prediction == 1: # Left
+        elif prediction_direction == 1: # Left
             msg.angular.z = -0.3
             msg.linear.x = 0.05
 
-            predicted_color = 1 #TODO TEMP
-
-        elif prediction == 2: # Right
+        elif prediction_direction == 2: # Right
             msg.angular.z = 0.3
             msg.linear.x = 0.05
-
-            predicted_color = 2 #TODO TEMP
-
 
         else: # Nothing
             msg.angular.z = 0.2
             msg.linear.x = 0.0
 
-            predicted_color = 1 #TODO TEMP
+            
 
         # Publish cmd_vel
-        #self.publisher.publish(msg)
+        self.publisher.publish(msg)
 
         # Simulate color output (0: Yellow, 1: Red, 2: Blue)
         # Replace this with your model's actual color output in the future
@@ -205,11 +196,11 @@ class ImageSubscriber(Node):
         #predicted_color = 2 #TODO TEMP
 
         color_msg = Int32()
-        color_msg.data = predicted_color
+        color_msg.data = int(prediction_color)
         self.color_publisher.publish(color_msg)
 
-        color_names = ["Yellow", "Red", "Blue"]
-        print(f"Predicted direction: {prediction}, color: {color_names[predicted_color]}")
+        color_names = ["Red", "Yellow", "Blue"]
+        print(f"Predicted direction: {prediction_direction}, color: {color_names[prediction_color]}")
 
         # Return processed frames
         return grid_image_1, grid_image_2

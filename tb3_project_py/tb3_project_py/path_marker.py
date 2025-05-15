@@ -58,9 +58,9 @@ class PathVisualizer(Node):
         self.current_color_id = msg.data
 
     def get_color(self, color_id: int) -> ColorRGBA:
-        if color_id == 0:  # yellow
+        if color_id == 1:  # yellow
             return ColorRGBA(r=1.0, g=1.0, b=0.0, a=1.0)
-        elif color_id == 1:  # red
+        elif color_id == 0:  # red
             return ColorRGBA(r=1.0, g=0.0, b=0.0, a=1.0)
         elif color_id == 2:  # blue
             return ColorRGBA(r=0.0, g=0.0, b=1.0, a=1.0)
