@@ -51,7 +51,7 @@ def build_LeNet(width, height, depth, classes):
     model.add(MaxPooling2D(pool_size=(2, 2), strides=(2, 2)))
 
     # Optional Dropout after first pool (small value)
-    model.add(Dropout(0.25))
+    #model.add(Dropout(0.25))
 
     # second set of CONV => RELU => POOL layers
     model.add(Conv2D(50, (5, 5), padding="same"))
@@ -59,7 +59,7 @@ def build_LeNet(width, height, depth, classes):
     model.add(MaxPooling2D(pool_size=(2, 2), strides=(2, 2)))
 
     # Optional Dropout again
-    model.add(Dropout(0.25))
+    #model.add(Dropout(0.25))
 
     # first (and only) set of FC => RELU layers
     model.add(Flatten())
@@ -67,7 +67,7 @@ def build_LeNet(width, height, depth, classes):
     model.add(Activation("relu"))
 
     # Dropout after fully connected (higher value)
-    model.add(Dropout(0.5))
+    #model.add(Dropout(0.5))
 
     # softmax classifier
     model.add(Dense(classes))
