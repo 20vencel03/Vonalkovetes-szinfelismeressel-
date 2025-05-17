@@ -1,0 +1,9 @@
+/home/vencel/ros2_ws/src/Vonalkovetes-szinfelismeressel-/build/tb3_project/CMakeFiles/uninstall.dir
+/home/vencel/ros2_ws/src/Vonalkovetes-szinfelismeressel-/build/tb3_project/CMakeFiles/tb3_project_uninstall.dir
+/home/vencel/ros2_ws/src/Vonalkovetes-szinfelismeressel-/build/tb3_project/CMakeFiles/test.dir
+/home/vencel/ros2_ws/src/Vonalkovetes-szinfelismeressel-/build/tb3_project/CMakeFiles/edit_cache.dir
+/home/vencel/ros2_ws/src/Vonalkovetes-szinfelismeressel-/build/tb3_project/CMakeFiles/rebuild_cache.dir
+/home/vencel/ros2_ws/src/Vonalkovetes-szinfelismeressel-/build/tb3_project/CMakeFiles/list_install_components.dir
+/home/vencel/ros2_ws/src/Vonalkovetes-szinfelismeressel-/build/tb3_project/CMakeFiles/install.dir
+/home/vencel/ros2_ws/src/Vonalkovetes-szinfelismeressel-/build/tb3_project/CMakeFiles/install/local.dir
+/home/vencel/ros2_ws/src/Vonalkovetes-szinfelismeressel-/build/tb3_project/CMakeFiles/install/strip.dir

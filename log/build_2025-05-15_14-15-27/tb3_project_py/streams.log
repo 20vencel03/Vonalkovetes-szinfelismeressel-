@@ -1,0 +1,60 @@
+[1.052s] Invoking command in '/home/vencel/ros2_ws/src/Vonalkovetes-szinfelismeressel-/tb3_project_py': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PS1=(tf) \[\e]0;\u@\h: \w\a\]${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ PYTHONPATH=/home/vencel/ros2_ws/src/Vonalkovetes-szinfelismeressel-/build/tb3_project_py/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/vencel/ros2_ws/src/Vonalkovetes-szinfelismeressel-/install/tb3_project_py/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../build/tb3_project_py build --build-base /home/vencel/ros2_ws/src/Vonalkovetes-szinfelismeressel-/build/tb3_project_py/build install --record /home/vencel/ros2_ws/src/Vonalkovetes-szinfelismeressel-/build/tb3_project_py/install.log --single-version-externally-managed install_data
+[1.338s] running egg_info
+[1.338s] creating ../build/tb3_project_py/tb3_project_py.egg-info
+[1.359s] writing ../build/tb3_project_py/tb3_project_py.egg-info/PKG-INFO
+[1.359s] writing dependency_links to ../build/tb3_project_py/tb3_project_py.egg-info/dependency_links.txt
+[1.359s] writing entry points to ../build/tb3_project_py/tb3_project_py.egg-info/entry_points.txt
+[1.359s] writing requirements to ../build/tb3_project_py/tb3_project_py.egg-info/requires.txt
+[1.360s] writing top-level names to ../build/tb3_project_py/tb3_project_py.egg-info/top_level.txt
+[1.360s] writing manifest file '../build/tb3_project_py/tb3_project_py.egg-info/SOURCES.txt'
+[1.402s] reading manifest file '../build/tb3_project_py/tb3_project_py.egg-info/SOURCES.txt'
+[1.403s] writing manifest file '../build/tb3_project_py/tb3_project_py.egg-info/SOURCES.txt'
+[1.403s] running build
+[1.403s] running build_py
+[1.403s] creating /home/vencel/ros2_ws/src/Vonalkovetes-szinfelismeressel-/build/tb3_project_py/build
+[1.404s] creating /home/vencel/ros2_ws/src/Vonalkovetes-szinfelismeressel-/build/tb3_project_py/build/lib
+[1.404s] creating /home/vencel/ros2_ws/src/Vonalkovetes-szinfelismeressel-/build/tb3_project_py/build/lib/tb3_project_py
+[1.404s] copying tb3_project_py/line_follower_cnn_robot.py -> /home/vencel/ros2_ws/src/Vonalkovetes-szinfelismeressel-/build/tb3_project_py/build/lib/tb3_project_py
+[1.404s] copying tb3_project_py/path_marker.py -> /home/vencel/ros2_ws/src/Vonalkovetes-szinfelismeressel-/build/tb3_project_py/build/lib/tb3_project_py
+[1.404s] copying tb3_project_py/train_network.py -> /home/vencel/ros2_ws/src/Vonalkovetes-szinfelismeressel-/build/tb3_project_py/build/lib/tb3_project_py
+[1.404s] copying tb3_project_py/__init__.py -> /home/vencel/ros2_ws/src/Vonalkovetes-szinfelismeressel-/build/tb3_project_py/build/lib/tb3_project_py
+[1.404s] copying tb3_project_py/line_follower.py -> /home/vencel/ros2_ws/src/Vonalkovetes-szinfelismeressel-/build/tb3_project_py/build/lib/tb3_project_py
+[1.404s] copying tb3_project_py/save_training_images.py -> /home/vencel/ros2_ws/src/Vonalkovetes-szinfelismeressel-/build/tb3_project_py/build/lib/tb3_project_py
+[1.404s] copying tb3_project_py/line_follower_cnn.py -> /home/vencel/ros2_ws/src/Vonalkovetes-szinfelismeressel-/build/tb3_project_py/build/lib/tb3_project_py
+[1.404s] running install
+[1.412s] running install_lib
+[1.433s] creating /home/vencel/ros2_ws/src/Vonalkovetes-szinfelismeressel-/install/tb3_project_py/lib/python3.12/site-packages/tb3_project_py
+[1.433s] copying /home/vencel/ros2_ws/src/Vonalkovetes-szinfelismeressel-/build/tb3_project_py/build/lib/tb3_project_py/line_follower_cnn_robot.py -> /home/vencel/ros2_ws/src/Vonalkovetes-szinfelismeressel-/install/tb3_project_py/lib/python3.12/site-packages/tb3_project_py
+[1.433s] copying /home/vencel/ros2_ws/src/Vonalkovetes-szinfelismeressel-/build/tb3_project_py/build/lib/tb3_project_py/path_marker.py -> /home/vencel/ros2_ws/src/Vonalkovetes-szinfelismeressel-/install/tb3_project_py/lib/python3.12/site-packages/tb3_project_py
+[1.433s] copying /home/vencel/ros2_ws/src/Vonalkovetes-szinfelismeressel-/build/tb3_project_py/build/lib/tb3_project_py/train_network.py -> /home/vencel/ros2_ws/src/Vonalkovetes-szinfelismeressel-/install/tb3_project_py/lib/python3.12/site-packages/tb3_project_py
+[1.434s] copying /home/vencel/ros2_ws/src/Vonalkovetes-szinfelismeressel-/build/tb3_project_py/build/lib/tb3_project_py/__init__.py -> /home/vencel/ros2_ws/src/Vonalkovetes-szinfelismeressel-/install/tb3_project_py/lib/python3.12/site-packages/tb3_project_py
+[1.434s] copying /home/vencel/ros2_ws/src/Vonalkovetes-szinfelismeressel-/build/tb3_project_py/build/lib/tb3_project_py/line_follower.py -> /home/vencel/ros2_ws/src/Vonalkovetes-szinfelismeressel-/install/tb3_project_py/lib/python3.12/site-packages/tb3_project_py
+[1.434s] copying /home/vencel/ros2_ws/src/Vonalkovetes-szinfelismeressel-/build/tb3_project_py/build/lib/tb3_project_py/save_training_images.py -> /home/vencel/ros2_ws/src/Vonalkovetes-szinfelismeressel-/install/tb3_project_py/lib/python3.12/site-packages/tb3_project_py
+[1.434s] copying /home/vencel/ros2_ws/src/Vonalkovetes-szinfelismeressel-/build/tb3_project_py/build/lib/tb3_project_py/line_follower_cnn.py -> /home/vencel/ros2_ws/src/Vonalkovetes-szinfelismeressel-/install/tb3_project_py/lib/python3.12/site-packages/tb3_project_py
+[1.435s] byte-compiling /home/vencel/ros2_ws/src/Vonalkovetes-szinfelismeressel-/install/tb3_project_py/lib/python3.12/site-packages/tb3_project_py/line_follower_cnn_robot.py to line_follower_cnn_robot.cpython-312.pyc
+[1.436s] byte-compiling /home/vencel/ros2_ws/src/Vonalkovetes-szinfelismeressel-/install/tb3_project_py/lib/python3.12/site-packages/tb3_project_py/path_marker.py to path_marker.cpython-312.pyc
+[1.437s] byte-compiling /home/vencel/ros2_ws/src/Vonalkovetes-szinfelismeressel-/install/tb3_project_py/lib/python3.12/site-packages/tb3_project_py/train_network.py to train_network.cpython-312.pyc
+[1.439s] byte-compiling /home/vencel/ros2_ws/src/Vonalkovetes-szinfelismeressel-/install/tb3_project_py/lib/python3.12/site-packages/tb3_project_py/__init__.py to __init__.cpython-312.pyc
+[1.439s] byte-compiling /home/vencel/ros2_ws/src/Vonalkovetes-szinfelismeressel-/install/tb3_project_py/lib/python3.12/site-packages/tb3_project_py/line_follower.py to line_follower.cpython-312.pyc
+[1.440s] byte-compiling /home/vencel/ros2_ws/src/Vonalkovetes-szinfelismeressel-/install/tb3_project_py/lib/python3.12/site-packages/tb3_project_py/save_training_images.py to save_training_images.cpython-312.pyc
+[1.441s] byte-compiling /home/vencel/ros2_ws/src/Vonalkovetes-szinfelismeressel-/install/tb3_project_py/lib/python3.12/site-packages/tb3_project_py/line_follower_cnn.py to line_follower_cnn.cpython-312.pyc
+[1.443s] running install_data
+[1.444s] creating /home/vencel/ros2_ws/src/Vonalkovetes-szinfelismeressel-/install/tb3_project_py/share/ament_index
+[1.444s] creating /home/vencel/ros2_ws/src/Vonalkovetes-szinfelismeressel-/install/tb3_project_py/share/ament_index/resource_index
+[1.444s] creating /home/vencel/ros2_ws/src/Vonalkovetes-szinfelismeressel-/install/tb3_project_py/share/ament_index/resource_index/packages
+[1.444s] copying resource/tb3_project_py -> /home/vencel/ros2_ws/src/Vonalkovetes-szinfelismeressel-/install/tb3_project_py/share/ament_index/resource_index/packages
+[1.444s] copying package.xml -> /home/vencel/ros2_ws/src/Vonalkovetes-szinfelismeressel-/install/tb3_project_py/share/tb3_project_py
+[1.444s] creating /home/vencel/ros2_ws/src/Vonalkovetes-szinfelismeressel-/install/tb3_project_py/share/tb3_project_py/network_model
+[1.444s] copying network_model/model.keras -> /home/vencel/ros2_ws/src/Vonalkovetes-szinfelismeressel-/install/tb3_project_py/share/tb3_project_py/network_model
+[1.451s] copying network_model/model.best.keras -> /home/vencel/ros2_ws/src/Vonalkovetes-szinfelismeressel-/install/tb3_project_py/share/tb3_project_py/network_model
+[1.458s] copying network_model/model_training.png -> /home/vencel/ros2_ws/src/Vonalkovetes-szinfelismeressel-/install/tb3_project_py/share/tb3_project_py/network_model
+[1.458s] running install_egg_info
+[1.480s] Copying ../build/tb3_project_py/tb3_project_py.egg-info to /home/vencel/ros2_ws/src/Vonalkovetes-szinfelismeressel-/install/tb3_project_py/lib/python3.12/site-packages/tb3_project_py-1.0.0-py3.12.egg-info
+[1.481s] running install_scripts
+[1.617s] Installing line_follower script to /home/vencel/ros2_ws/src/Vonalkovetes-szinfelismeressel-/install/tb3_project_py/lib/tb3_project_py
+[1.617s] Installing line_follower_cnn script to /home/vencel/ros2_ws/src/Vonalkovetes-szinfelismeressel-/install/tb3_project_py/lib/tb3_project_py
+[1.617s] Installing line_follower_cnn_robot script to /home/vencel/ros2_ws/src/Vonalkovetes-szinfelismeressel-/install/tb3_project_py/lib/tb3_project_py
+[1.617s] Installing path_marker script to /home/vencel/ros2_ws/src/Vonalkovetes-szinfelismeressel-/install/tb3_project_py/lib/tb3_project_py
+[1.617s] Installing save_training_images script to /home/vencel/ros2_ws/src/Vonalkovetes-szinfelismeressel-/install/tb3_project_py/lib/tb3_project_py
+[1.617s] writing list of installed files to '/home/vencel/ros2_ws/src/Vonalkovetes-szinfelismeressel-/build/tb3_project_py/install.log'
+[1.649s] Invoked command in '/home/vencel/ros2_ws/src/Vonalkovetes-szinfelismeressel-/tb3_project_py' returned '0': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PS1=(tf) \[\e]0;\u@\h: \w\a\]${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ PYTHONPATH=/home/vencel/ros2_ws/src/Vonalkovetes-szinfelismeressel-/build/tb3_project_py/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/vencel/ros2_ws/src/Vonalkovetes-szinfelismeressel-/install/tb3_project_py/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../build/tb3_project_py build --build-base /home/vencel/ros2_ws/src/Vonalkovetes-szinfelismeressel-/build/tb3_project_py/build install --record /home/vencel/ros2_ws/src/Vonalkovetes-szinfelismeressel-/build/tb3_project_py/install.log --single-version-externally-managed install_data
