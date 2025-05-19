@@ -30,6 +30,10 @@ A robot viselkedjen eltérően különböző színű vonalak esetén.
  
 Valódi robot vagy szimuláció megvalósítása.
 
+#A programok futtatásához sz ükséges csomagok és azok telepítése
+
+
+
 
 # Készített pályák
 Különböző színű és szélességű pályákat készítettünk.
