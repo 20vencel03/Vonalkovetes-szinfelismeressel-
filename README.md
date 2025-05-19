@@ -30,10 +30,7 @@ A robot viselkedjen eltérően különböző színű vonalak esetén.
  
 Valódi robot vagy szimuláció megvalósítása.
 
-#A programok futtatásához sz ükséges csomagok és azok telepítése
-
-
-
+# A projekt futtatásához szükséges programok és azok futtatása
 
 # Készített pályák
 Különböző színű és szélességű pályákat készítettünk.
