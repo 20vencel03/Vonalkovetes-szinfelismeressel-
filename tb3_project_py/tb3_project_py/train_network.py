@@ -37,24 +37,6 @@ print("Tensorflow version: %s" % tf.__version__)
 keras_version = str(keras_version).encode('utf8')
 print("Keras version: %s" % keras_version)
 
-
-
-# Define label mapping
-LABELS = {
-    'Blue_Forward': 0,
-    'Blue_Left': 1,
-    'Blue_Right': 2,
-    'Yellow_Forward': 3,
-    'Yellow_Left': 4,
-    'Yellow_Right': 5,
-    'Red_Forward': 6,
-    'Red_Left': 7,
-    'Red_Right': 8,
-    'Nothing': 9
-}
-
-NUM_CLASSES = len(LABELS)
-
 def build_LeNet(width, height, depth, classes):
     # initialize the model
     model = Sequential()
@@ -89,7 +71,7 @@ def build_LeNet(width, height, depth, classes):
 
     # softmax classifier
     model.add(Dense(classes))
-    model.add(Activation("softmax"))
+    model.add(Activation("sigmoid"))
 
     # return the constructed network architecture
     return model
@@ -113,33 +95,23 @@ for imagePath in imagePaths:
     data.append(image)
     # extract the class label from the image path and update the
     # labels list
-
-    # label = imagePath.split(os.path.sep)[-2]
-    # print("Image: %s, Label: %s" % (imagePath, label))
-    # if label == 'forward':
-    #     label = 0
-    # elif label == 'right':
-    #     label = 1
-    # elif label == 'left':
-    #     label = 2
-    # elif label == 'nothing':
-    #     label = 3
-    # elif label == 'red':
-    #     label = 4
-    # elif label == 'yellow':
-    #     label = 5    
-    # elif label == 'blue':
-    #     label = 6
-    # labels.append(label)
-    # Extract label from path
-
-    label = os.path.basename(os.path.dirname(imagePath))
-    if label not in LABELS:
-        print(f"[WARNING] Skipping unknown label: {label}")
-        continue
-    labels.append(LABELS[label])
-
-
+    label = imagePath.split(os.path.sep)[-2]
+    print("Image: %s, Label: %s" % (imagePath, label))
+    if label == 'forward':
+        label = 0
+    elif label == 'right':
+        label = 1
+    elif label == 'left':
+        label = 2
+    elif label == 'nothing':
+        label = 3
+    elif label == 'red':
+        label = 4
+    elif label == 'yellow':
+        label = 5    
+    elif label == 'blue':
+        label = 6
+    labels.append(label)
     
     
 # scale the raw pixel intensities to the range [0, 1]
@@ -149,19 +121,19 @@ labels = np.array(labels)
 # partition the data into training and testing splits using 75% of
 # the data for training and the remaining 25% for testing
 (trainX, testX, trainY, testY) = train_test_split(data, labels, test_size=0.25, random_state=42)# convert the labels from integers to vectors
-trainY = to_categorical(trainY, num_classes=NUM_CLASSES)
-testY = to_categorical(testY, num_classes=NUM_CLASSES)
+trainY = to_categorical(trainY, num_classes=7)
+testY = to_categorical(testY, num_classes=7)
 
 
 # initialize the number of epochs to train for, initial learning rate,
 # and batch size
-EPOCHS  = 80
+EPOCHS  = 40
 INIT_LR = 0.001
 BS      = 32
 
 # initialize the model
 print("[INFO] compiling model...")
-model = build_LeNet(width=image_size, height=image_size, depth=3, classes=NUM_CLASSES)
+model = build_LeNet(width=image_size, height=image_size, depth=3, classes=7)
 opt = Adam(learning_rate=INIT_LR)
 model.compile(loss="binary_crossentropy", optimizer=opt, metrics=["accuracy"])
  

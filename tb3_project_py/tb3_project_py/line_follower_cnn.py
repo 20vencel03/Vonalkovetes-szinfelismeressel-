@@ -75,11 +75,11 @@ class ImageSubscriber(Node):
 
         # Initialize CvBridge
         self.bridge = CvBridge()
-
+        
         # Variable to store the latest frame
         self.latest_frame = None
         self.frame_lock = threading.Lock()  # Lock to ensure thread safety
-
+        
         # Flag to control the display loop
         self.running = True
 
@@ -144,51 +144,15 @@ class ImageSubscriber(Node):
         image = np.array(image, dtype="float") / 255.0
 
         image = image.reshape(-1, self.image_size, self.image_size, 3)
-
+        
         with tf.device('/gpu:0'):
             prediction_all = (self.model(image, training=False))
 
 
             #print(prediction_all)
 
-            #prediction_direction = np.argmax(prediction_all[0][0:4])
-            #prediction_color = np.argmax(prediction_all[0][4:7])
-            prediction = np.argmax(prediction_all)
-
-            # 0 = forward 1 = left 2 = right 3 = nothing
-            # 0 = red 1 = yellow 2 = blue
-
-            if prediction == 0: # Blue Forward
-                prediction_direction = 0
-                prediction_color = 2
-            elif prediction == 1: # Blue Left
-                prediction_direction = 1
-                prediction_color = 2
-            elif prediction == 2: # Blue Right
-                prediction_direction = 2
-                prediction_color = 2
-            elif prediction == 3: # Yellow Forward
-                prediction_direction = 0
-                prediction_color = 1
-            elif prediction == 4: # Yellow Left
-                prediction_direction = 1
-                prediction_color = 1
-            elif prediction == 5: # Yellow Right
-                prediction_direction = 2
-                prediction_color = 1
-            elif prediction == 6: # Red Forward
-                prediction_direction = 0
-                prediction_color = 0
-            elif prediction == 7: # Red Left
-                prediction_direction = 1
-                prediction_color = 0
-            elif prediction == 8: # Red Right
-                prediction_direction = 2
-                prediction_color = 0
-            else: # Nothing
-                prediction_direction = 3
-                prediction_color = -1
-
+            prediction_direction = np.argmax(prediction_all[0][0:4])
+            prediction_color = np.argmax(prediction_all[0][4:7])
 
             print(prediction_direction,
             prediction_color)
@@ -204,9 +168,6 @@ class ImageSubscriber(Node):
 
         #print("Prediction %d, elapsed time %.3f" % (prediction_direction, time.time()-self.last_time))
         self.last_time = time.time()
-
-
-
 
         if  prediction_color == 0: # Red
             speed_coeff = 0.2
@@ -236,10 +197,7 @@ class ImageSubscriber(Node):
             msg.angular.z = 0.2
             msg.linear.x = 0.0
 
-
-
-
-
+            
 
         # Publish cmd_vel
         self.publisher.publish(msg)
@@ -307,7 +265,7 @@ class ImageSubscriber(Node):
         S = hls[:, :, 2]
 
         return H, L, S
-
+    
     # apply a trapezoid polygon mask, size is hardcoded for 640x480px
     def apply_polygon_mask(self, img):
         mask = np.zeros_like(img)
@@ -378,7 +336,7 @@ def main(args=None):
 
     rclpy.init(args=args)
     node = ImageSubscriber()
-
+    
     try:
         node.display_image()  # Run the display loop
     except KeyboardInterrupt:
