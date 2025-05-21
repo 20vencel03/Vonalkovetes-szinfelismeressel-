@@ -10,7 +10,7 @@ Vonalkövetés színfelismeréssel TurtleBot3 robottal és neurális hálóval
 
 A neurális háló nemcsak a vonal irányát, hanem annak színét is meghatározza.  
 A robot felismeri a különböző színű vonalakat, a színt kiírja és ennek megfelelően viselkedik.  
-A bejárt pályát és a detektált vonalszínt egy külön ROS node vizualizálja RViz-ben.  
+A bejárt pályát és a detektált vonalszínt egy külön ROS node vizualizálja az RViz-ben.
 A projekt szimulációban fut, de a kód elvileg valós TurtleBot3 robottal is kompatibilis.
 
 ---
@@ -45,10 +45,11 @@ pip3 install numpy opencv-python torch torchvision matplotlib
 ## Készített pályák
 Különböző színű és szélességű pályákat készítettünk.
 A robotnak RViz-ben ki kell rajzolnia a bejárt pályát és a pályaszakaszok színeit.
-A pályák eltérnelk szélességükben, van amelyik rendelkezik éllel. A pályák színezése során piros, kék és sárga színeket használtunk.
+A pályák eltérnek a szélességükben, van, amelyik rendelkezik éllel.
 
-A pályák megtalálhatók a ./tb3_project/worlds mappában (az sdf-ek). A .dae fájlok (a blender pályakészítő program outputja) pedig a ./gazeboo_models mappában található.
+A pályák színezése során piros, kék és sárga színeket használtunk.
 
+A pályák megtalálhatók a ./tb3_project/worlds mappában (az sdf fájlok), a .dae fájlok (a Blender pályakészítő program kimenete) pedig a ./gazebo_models mappában találhatók.
 
 
 ### RViz röviden
@@ -62,8 +63,15 @@ Ebben a projektben az RViz segítségével láthatod:
 
 Az RViz a `/cmd_vel`, `/camera/image_raw` és más ROS topikokból származó adatokat jeleníti meg vizuálisan, így egyszerűen ellenőrizhető, hogy a robot hogyan követi a színes vonalat.
 
+Az RViz beállításai a ./tb3_project/Rviz/turtlebot3_line_follower.rviz fájlban találhatók, és az RViz-ben megnyitva grafikusan szerkeszthetők.FAz 
+#### Rviz Path_marker node
 
-###Gazeboo
+
+Egy extra node-ot készítettünk, ami kirajzolja Rvizben a robot által befutott pályát a neurális háló által felismert színnel (a neurális háló be lett tanítva, hogy a kamerakép alapján felismerje a pálya színét). A színt a line_color topicon keresztül kapja meg a node, továbbá a robot helyzetét odometriával, az odom topic-on keresztül kapja meg majd a path_marker topicra kiküld egy Marker típusú objektumot. 
+Az RViz minden topikot lát, és a topikok az RViz-ben jelennek meg.
+
+
+### Gazebo
 
 A **Gazebo** egy robotikai szimulációs környezet, amely lehetővé teszi különféle robotok, érzékelők és környezetek valósághű modellezését.  
 Ebben a projektben a Gazebo biztosítja a TurtleBot3 robot és a pálya szimulációját, így a robot mozgása, szenzorai és a vonalkövetés folyamata anélkül tesztelhető, hogy valódi hardverre lenne szükség.
@@ -76,7 +84,7 @@ A Gazebo együttműködik a ROS-szal, így a robot szimulált érzékelőadatai 
 
 ## Dependenciák
 ## Működés
-## Vizulizáció
+## Vizualizáció
 
 #### Mit csinál a neurális hálózat?
 
@@ -94,5 +102,6 @@ Emellett a kód vizualizálja a hálózat belső rétegeinek úgynevezett **feat
 
 
 # Eredmények
-A projektről futás közben készített videó megtalálható Youtube-on. 
+A projektről futás közben készült videó megtalálható a YouTube-on.
+
 Link: https://youtu.be/CRSvCb_Uejo
