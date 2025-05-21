@@ -94,4 +94,5 @@ Emellett a kód vizualizálja a hálózat belső rétegeinek úgynevezett **feat
 
 
 # Eredmények
-A projektről futás közben készített videó megtalálható Youtube-on. Link:
+A projektről futás közben készített videó megtalálható Youtube-on. 
+Link: https://youtu.be/CRSvCb_Uejo
