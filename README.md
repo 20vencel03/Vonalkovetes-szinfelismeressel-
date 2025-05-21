@@ -100,6 +100,7 @@ Emellett a kód vizualizálja a hálózat belső rétegeinek úgynevezett **feat
 
 
 A neurális háló tanításról készült kép: 
+
 ![A neurális hálózat tanítása](https://raw.githubusercontent.com/20vencel03/Vonalkovetes-szinfelismeressel-/main/tb3_project_py/network_model/model_training.png)
 
 
