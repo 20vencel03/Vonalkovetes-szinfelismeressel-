@@ -131,7 +131,7 @@
           <geometry>
             <mesh>
               <uri>model://world_dark/meshes/world_dark.dae</uri>
-              <scale>1 1 0.1</scale>
+              <scale>1 1 0.0001</scale>
             </mesh>
           </geometry>
           <transparency>0</transparency>
@@ -144,7 +144,7 @@
           <geometry>
             <mesh>
               <uri>odel://world_dark/meshes/world_dark.dae</uri>
-              <scale>1 1 0.1</scale>
+              <scale>1 1 0.0001</scale>
             </mesh>
           </geometry>
           <surface>
