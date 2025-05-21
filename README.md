@@ -42,43 +42,6 @@ pip3 install numpy opencv-python torch torchvision matplotlib
 
 ```
 
-
-
-
-# Vonalkovetes-szinfelismeressel-
-Vonalkövetés színfelismeréssel turtlebottal és neurális hálóval / BME Mechatronika MSc Kognitív Robotika tárgya
-
-# A megoldandó feladat leírása
-A neurális háló nem csak a vonal irányát, hanem annak színét is meghatározza.
-A robot különböző színű vonalakat felismeri, azok színét kiírja.
-A bejárt pályát és a vonal színét egy saját ROS node jeleníti meg RViz-ben.
-A projekt szimulációban valósul meg, de a kód alkalmas valós roboton (Turtlebot) történő futtatásra is.
-
-
-
-## A projekt futtatásához szükséges csomagok és könyvtárak
-
-### Rendszerkövetelmények
-- Ubuntu 20.04
-- ROS 2 Foxy Fitzroy
-- Gazebo (a ROS 2 Foxy telepítés része)
-
-### Python csomagok (általában `requirements.txt`-be is tehetők):
-- `numpy`
-- `opencv-python`
-- `torch`
-- `torchvision`
-- `cv_bridge`
-- `colcon-common-extensions` (buildeléshez)
-- `matplotlib` (vizualizációhoz, ha használva van)
-
-Telepítés:
-```bash
-sudo apt update
-sudo apt install ros-foxy-cv-bridge python3-colcon-common-extensions
-pip3 install numpy opencv-python torch torchvision matplotlib
-```
-
 ## Készített pályák
 Különböző színű és szélességű pályákat készítettünk.
 A robotnak RViz-ben ki kell rajzolnia a bejárt pályát és a pályaszakaszok színeit.
@@ -131,4 +94,4 @@ Emellett a kód vizualizálja a hálózat belső rétegeinek úgynevezett **feat
 
 
 # Eredmények
-"videó"
+A projektről futás közben készített videó megtalálható Youtube-on. Link:
