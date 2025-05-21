@@ -43,11 +43,11 @@ pip3 install numpy opencv-python torch torchvision matplotlib
 ```
 
 ## Készített pályák
-Különböző színű és szélességű pályákat készítettünk.
-A robotnak RViz-ben ki kell rajzolnia a bejárt pályát és a pályaszakaszok színeit.
-A pályák eltérnek a szélességükben, van, amelyik rendelkezik éllel.
+Több különböző szélességű vonallal is készült pálya, amelyek közül a szigetelő szalag szélességével megegyező, 20 mm széles bizonyult a legjobbnak. A pálya Blenderes környezetére többféle megoldást kipróbáltunk. Az első esetnél magánál a pályánálvonalnál 2-3x vastagabb "aszfaltcsík" húzódott végi a pályán, azonban ennél könnyebben volt felhasználható, amikor csak a követendő színes vonalat tartalmazta a pálya. A legújabb verzióknál egy az egész zárt görbét tartalmazó "padlódarabon" található a vonal.
+A pályákban hárpm színű követendő vonal váltakozik, kék, sárga és piros. A kék szakasz a közel egyenes és egészen nagy görbületi sugárú szakaszokból áll, a sárga szakasz több és kissé élesebb kanyarokat tartalmaz, emiatt a robot lasabban is közlekedik rajta. A piros szakasz sok és éles kanyarból áll, a robot itt halad a leglassabban. 
 
-A pályák színezése során piros, kék és sárga színeket használtunk.
+A robotnak RViz-ben ki kell rajzolnia a bejárt pályát és a pályaszakaszok színeit.
+
 
 A pályák megtalálhatók a ./tb3_project/worlds mappában (az sdf fájlok), a .dae fájlok (a Blender pályakészítő program kimenete) pedig a ./gazebo_models mappában találhatók.
 
