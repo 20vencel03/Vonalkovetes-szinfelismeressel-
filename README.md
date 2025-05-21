@@ -46,7 +46,7 @@ pip3 install numpy opencv-python torch torchvision matplotlib
 Több különböző szélességű vonallal is készült pálya, amelyek közül a szigetelő szalag szélességével megegyező, kb. 20 mm széles bizonyult a legjobbnak.
 A pálya Blenderes környezetére többféle megoldást kipróbáltunk. Legjobbnak az bizonyult, amikor egy az egész zárt görbét tartalmazó "padlódarabon" található a vonal. A másik két verzió a vonalat tratalmazó "aszfaltcsík" és csak magát a vonalat tartalmazó Blender modellek voltak.
 
-A pályákban a követendő vonal három színben váltakozik, kék, sárga és piros. A kék szakasz a közel egyenes és nagy görbületi sugárú szakaszokból áll, a sárga szakasz több és kissé élesebb kanyarokat tartalmaz, emiatt a robot lasabban is közlekedik rajta. A piros szakasz sok és éles kanyarból áll, ezért a robot itt halad a leglassabban.
+A pályákban a követendő vonal három színben váltakozik, kék, sárga és piros. A kék szakasz a közel egyenes és nagy görbületi sugárú vonalból áll, a sárga szakasz több és kissé élesebb kanyarokat tartalmaz, emiatt a robot lasabban is közlekedik rajta. A piros szakasz sok és éles kanyarból áll, ezért a robot itt halad a leglassabban.
 
 
 A robotnak RViz-ben a bejárt pályát és annak színét is ki kell rajzolnia.
