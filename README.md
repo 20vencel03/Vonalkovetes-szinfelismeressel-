@@ -1,6 +1,5 @@
 *A simulation_bringup_line_follow a saját pályán fusson
 *Kipróbál, hogy ezt tudja e követni az eredeti NN
-*Az NN változtatása, hogy 4 helyett 7 mappával dolgozzon és két kimenete legyen és tanítás
 *Az line_follower_cnn átírása, hogy a frissített NN-t tudja kezelni (első körben 2 szín alapján sebesség nem feltétlen kell)
 **vizualizáció átírása ha kell (ezt nem emlékszem most hogy volt)
 **viselkedés átírása színek kezelésére
@@ -101,6 +100,21 @@ Különböző színű és szélességű pályákat készítettünk.
 A robotnak RViz-ben ki kell rajzolnia a bejárt pályát és a pályaszakaszok színeit.
 A pályák eltérnelk szélességükben, van amelyik rendelkezik éllel. A pályák színezése során piros, kék és sárga színeket használtunk.
 
+
+
+### RViz röviden
+
+Az **RViz** egy vizualizációs eszköz a ROS rendszerben, amely lehetővé teszi a robotok szenzoradatainak, mozgásának és állapotainak valós idejű megjelenítését.  
+Ebben a projektben az RViz segítségével láthatod:
+
+- a TurtleBot3 robot aktuális helyzetét és mozgását a szimulációban,
+- a kamera által látott képet,
+- a neurális hálózat által detektált vonal színét és irányát.
+
+Az RViz a `/cmd_vel`, `/camera/image_raw` és más ROS topikokból származó adatokat jeleníti meg vizuálisan, így egyszerűen ellenőrizhető, hogy a robot hogyan követi a színes vonalat.
+
+
+###Gazeboo
 
 # Projekt felépítése
 ## Struktúra
