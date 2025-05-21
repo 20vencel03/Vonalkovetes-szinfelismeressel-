@@ -58,6 +58,9 @@ sudo apt update
 sudo apt install ros-foxy-cv-bridge python3-colcon-common-extensions
 pip3 install numpy opencv-python torch torchvision matplotlib
 
+\```
+
+
 
 # Vonalkovetes-szinfelismeressel-
 Vonalkövetés színfelismeréssel turtlebottal és neurális hálóval / BME Mechatronika MSc Kognitív Robotika tárgya
