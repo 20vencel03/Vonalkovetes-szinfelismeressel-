@@ -99,6 +99,9 @@ Az eredmények alapján a robot automatikusan meghatározza, hogyan mozogjon tov
 Emellett a kód vizualizálja a hálózat belső rétegeinek úgynevezett **feature map-jeit** is, így betekintést nyerhetsz abba, hogyan dolgozza fel a képet a hálózat.
 
 
+A neurális háló tanításról készült kép: 
+![A neurális hálózat tanítása](https://raw.githubusercontent.com/20vencel03/Vonalkovetes-szinfelismeressel-/main/tb3_project_py/network_model/model_training.png)
+
 
 
 # Eredmények
