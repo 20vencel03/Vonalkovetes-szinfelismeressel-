@@ -170,7 +170,7 @@ class ImageSubscriber(Node):
         self.last_time = time.time()
 
         if  prediction_color == 0: # Red
-            speed_coeff = 0.2
+            speed_coeff = 0.5
         elif prediction_color == 1: # Yellow
             speed_coeff = 1
         elif prediction_color == 2: # Blue
@@ -178,7 +178,7 @@ class ImageSubscriber(Node):
         else:
             speed_coeff = 0.0
 
-        speed_coeff = 1
+        #speed_coeff = 1
 
 
         if prediction_direction == 0: # Forward

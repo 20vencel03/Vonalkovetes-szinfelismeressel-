@@ -42,17 +42,17 @@ def generate_launch_description():
     )
 
     x_pose_arg = DeclareLaunchArgument(
-        'x_pose', default_value='1.0',
+        'x_pose', default_value='1.20',
         description='x coordinate of spawned robot'
     )
 
     y_pose_arg = DeclareLaunchArgument(
-        'y_pose', default_value='0.0',
+        'y_pose', default_value='0.28',
         description='y coordinate of spawned robot'
     )
 
     z_pose_arg = DeclareLaunchArgument(
-        'z_pose', default_value='0.3',
+        'z_pose', default_value='0.5',
         description='z coordinate of spawned robot'
     )
 
@@ -62,7 +62,7 @@ def generate_launch_description():
     )
 
     world_arg = DeclareLaunchArgument(
-        'world', default_value='world_pebbled.sdf',
+        'world', default_value='world_light.sdf',
         description='Name of the Gazebo world file to load'
     )
 
