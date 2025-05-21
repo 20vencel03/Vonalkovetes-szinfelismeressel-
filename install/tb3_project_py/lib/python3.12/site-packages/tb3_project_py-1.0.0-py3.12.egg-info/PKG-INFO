@@ -1,7 +1,0 @@
-Metadata-Version: 2.1
-Name: tb3-project-py
-Version: 1.0.0
-Summary: BME MOGI ROS course related python nodes to the official Turtlebot 3 packages modified for student projetct
-Maintainer: Matyas Gergo
-Maintainer-email: matyaspg@gmail.com
-License: Apache License 2.0
