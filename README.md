@@ -82,8 +82,8 @@ A Gazebo együttműködik a ROS-szal, így a robot szimulált érzékelőadatai 
 # Projekt felépítése
 
 
-## Dependenciák
-## Működés
+<!--## Dependenciák
+## Működés -->
 ## Vizualizáció
 
 #### Mit csinál a neurális hálózat?
