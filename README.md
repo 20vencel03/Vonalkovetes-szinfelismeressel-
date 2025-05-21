@@ -1,20 +1,3 @@
-*A simulation_bringup_line_follow a saját pályán fusson
-*Kipróbál, hogy ezt tudja e követni az eredeti NN
-*Az line_follower_cnn átírása, hogy a frissített NN-t tudja kezelni (első körben 2 szín alapján sebesség nem feltétlen kell)
-**vizualizáció átírása ha kell (ezt nem emlékszem most hogy volt)
-**viselkedés átírása színek kezelésére
-*RVIZ-ben a szín felsmerés alapján színezni a megtett utat.
-*A projekt lecsupaszítása -> fölösleges launch fileok és stb töröl (ide elkezdem gyűjteni neveket csak, a végén csináljuk szerintem csak)
-**robot_ -os launch fileok 3db
-**check_urdf -> nekem az eredeti sem fut
-*
-
-#### TODO readme
-*projekt dependenciák listázása
-*high level működése leírása (rviz, szín alapú sebesség)
-
-
-
 
 # Vonalkövetés színfelismeréssel
 
@@ -94,11 +77,14 @@ Telepítés:
 sudo apt update
 sudo apt install ros-foxy-cv-bridge python3-colcon-common-extensions
 pip3 install numpy opencv-python torch torchvision matplotlib
+```
 
 ## Készített pályák
 Különböző színű és szélességű pályákat készítettünk.
 A robotnak RViz-ben ki kell rajzolnia a bejárt pályát és a pályaszakaszok színeit.
 A pályák eltérnelk szélességükben, van amelyik rendelkezik éllel. A pályák színezése során piros, kék és sárga színeket használtunk.
+
+A pályák megtalálhatók a ./tb3_project/worlds mappában (az sdf-ek). A .dae fájlok (a blender pályakészítő program outputja) pedig a ./gazeboo_models mappában található.
 
 
 
@@ -116,16 +102,31 @@ Az RViz a `/cmd_vel`, `/camera/image_raw` és más ROS topikokból származó ad
 
 ###Gazeboo
 
+A **Gazebo** egy robotikai szimulációs környezet, amely lehetővé teszi különféle robotok, érzékelők és környezetek valósághű modellezését.  
+Ebben a projektben a Gazebo biztosítja a TurtleBot3 robot és a pálya szimulációját, így a robot mozgása, szenzorai és a vonalkövetés folyamata anélkül tesztelhető, hogy valódi hardverre lenne szükség.
+
+A Gazebo együttműködik a ROS-szal, így a robot szimulált érzékelőadatai és vezérlése ugyanúgy elérhetők, mintha egy valós roboton dolgoznánk.
+
+
 # Projekt felépítése
-## Struktúra
-A ./Tracks mappa tartalmazza a pályáka, amiken a robotnak végig kell mennie. 
-A ./tb3_project 
+
 
 ## Dependenciák
 ## Működés
 ## Vizulizáció
 
-# Neurális Háló
+#### Mit csinál a neurális hálózat?
+
+A projektben használt **neurális hálózat** egy képosztályozó modell, amely a robot kameraképéből két dolgot ismer fel:
+
+- **Milyen irányba** kell kormányozni a robotot a vonal követéséhez (pl. egyenesen, balra, jobbra, vagy nincs vonal),
+- **Milyen színű** vonalat lát a kamera (piros, sárga vagy kék).
+
+A hálózat bemenetére a kamera képe kerül, majd a kimenetén egyszerre becsli az irányt és a vonal színét.  
+Az eredmények alapján a robot automatikusan meghatározza, hogyan mozogjon tovább, illetve továbbítja a felismert vonal színét egy külön ROS topikra.
+
+Emellett a kód vizualizálja a hálózat belső rétegeinek úgynevezett **feature map-jeit** is, így betekintést nyerhetsz abba, hogyan dolgozza fel a képet a hálózat.
+
 
 
 
