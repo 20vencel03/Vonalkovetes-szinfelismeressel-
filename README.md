@@ -2,7 +2,7 @@
 # Vonalkövetés színfelismeréssel
 
 Vonalkövetés színfelismeréssel TurtleBot3 robottal és neurális hálóval  
-**BME Mechatronika MSc – Kognitív Robotika tárgy**
+**BME Mechatronika MSc – Kognitív Robotika tárgy projekt feladata**
 
 ---
 
@@ -18,28 +18,60 @@ A projekt szimulációban fut, de a kód elvileg valós TurtleBot3 robottal is k
 ## A projekt futtatásához szükséges csomagok és könyvtárak
 
 ### Rendszerkövetelmények
-- Ubuntu 20.04
-- ROS 2 Foxy Fitzroy
-- Gazebo (a ROS 2 Foxy telepítés része)
+- Ubuntu 24.04
+- ROS 2 [Jazzy](https://docs.ros.org/en/jazzy/Installation/Ubuntu-Install-Debs.html)
+- Gazebo (compatible version with Jazzy like Harmonic)
+
+### Ros2 package-k
+A Turtlebot3 már nem támogatott, de az alábbi maintainelt package-kkel működik:
+```yaml
+git clone -b ros2 https://github.com/MOGI-ROS/turtlebot3_msgs
+git clone -b mogi-ros2 https://github.com/MOGI-ROS/turtlebot3
+git clone -b new_gazebo https://github.com/MOGI-ROS/turtlebot3_simulations
+git clone https://github.com/MOGI-ROS/mogi_trajectory_server
+```
+### Dependenciák
+Az alábbi dependenciákat is telepíteni kell:
+```yaml
+sudo apt install ros-jazzy-ros-gz
+sudo apt install ros-jazzy-dynamixel-sdk
+sudo apt install ros-jazzy-rclpy
+sudo apt install ros-jazzy-sensor-msgs
+sudo apt install ros-jazzy-geometry-msgs
+sudo apt install ros-jazzy-std-msgs 
+sudo apt install ros-jazzy-cv-bridge
+sudo apt install ros-jazzy-ament-index-python
+sudo apt install python3-pip
+sudo apt install pipx
+```
+
 
 ### Python csomagok
 
 A szükséges csomagok egy `requirements.txt` fájlba is kerülhetnek, de manuálisan is telepíthetők:
 
-- `numpy`
+- `numpy==1.26.4`
 - `opencv-python`
+-  `tensorflow==2.18.0`
+- `imutils`
+- `scikit-learn`
+- `h5py`
 - `torch`
 - `torchvision`
 - `cv_bridge`
 - `matplotlib`
 - `colcon-common-extensions` (buildhez szükséges)
 
-#### Telepítés
+#### Telepítés például:
 ```bash
 sudo apt update
-sudo apt install ros-foxy-cv-bridge python3-colcon-common-extensions
-pip3 install numpy opencv-python torch torchvision matplotlib
-
+sudo apt upgrade
+pip install tensorflow==2.18.0
+pip install imutils
+pip install scikit-learn
+pip install opencv-python
+pip install matplotlib
+pip install numpy==1.26.4
 ```
 
 ## Készített pályák
@@ -55,58 +87,103 @@ A robotnak RViz-ben a bejárt pályát és annak színét is ki kell rajzolnia.
 A pályák megtalálhatók a ./tb3_project/worlds mappában (az sdf fájlok), a .dae fájlok (a Blender pályakészítő program kimenete) pedig a ./gazebo_models mappában találhatók.
 
 
-### RViz röviden
+## Szimulációs és vizalizációs környezet röviden
 
-Az **RViz** egy vizualizációs eszköz a ROS rendszerben, amely lehetővé teszi a robotok szenzoradatainak, mozgásának és állapotainak valós idejű megjelenítését.  
-Ebben a projektben az RViz segítségével láthatod:
+### RViz – Vizualizáció a ROS-ban
 
-- a TurtleBot3 robot aktuális helyzetét és mozgását a szimulációban,
-- a kamera által látott képet,
-- a neurális hálózat által detektált vonal színét és irányát.
+Az **RViz** egy vizualizációs eszköz a ROS rendszerben, amely lehetővé teszi robotok szenzoradatainak, mozgásának és egyéb állapotainak valós idejű megjelenítését.
 
-Az RViz a `/cmd_vel`, `/camera/image_raw` és más ROS topikokból származó adatokat jeleníti meg vizuálisan, így egyszerűen ellenőrizhető, hogy a robot hogyan követi a színes vonalat.
+Ebben a projektben az RViz az alábbiakat jeleníti meg:
 
-Az RViz beállításai a ./tb3_project/Rviz/turtlebot3_line_follower.rviz fájlban találhatók, és az RViz-ben megnyitva grafikusan szerkeszthetők.FAz 
-#### Rviz Path_marker node
+- a TurtleBot3 aktuális helyzetét és mozgását,
+- a robot kamerájának képét,
+- a neurális hálózat által detektált **vonalszínt és haladási irányt**,
+- a robot által megtett útvonalat színezve – a felismert vonal színe alapján.
+
+A színinformációt a rendszer a `line_color` topicon keresztül továbbítja, míg a pozícióadatokat az `odom` topik szolgáltatja.  
+Ezek alapján egy külön ROS node (a `Path_marker`) **Marker** típusú objektumokat küld ki a `path_marker` topikra, amelyek a pálya vizuális megjelenítését szolgálják az RViz-ben.
+
+Az RViz konfigurációs fájl a következő helyen található:
+./tb3_project/Rviz/turtlebot3_line_follower.rviz
+
+Ez a fájl előre beállított nézeteket, témákat és vizualizációs elemeket tartalmaz, és közvetlenül betölthető az RViz felületén keresztül is.
+
+### Rviz Path_marker node
 
 
 Egy extra node-ot készítettünk, ami kirajzolja Rvizben a robot által befutott pályát a neurális háló által felismert színnel (a neurális háló be lett tanítva, hogy a kamerakép alapján felismerje a pálya színét). A színt a line_color topicon keresztül kapja meg a node, továbbá a robot helyzetét odometriával, az odom topic-on keresztül kapja meg majd a path_marker topicra kiküld egy Marker típusú objektumot. 
 Az RViz minden topikot lát, és a topikok az RViz-ben jelennek meg.
 
 
-### Gazebo
+### Gazebo – Szimulációs környezet
 
-A **Gazebo** egy robotikai szimulációs környezet, amely lehetővé teszi különféle robotok, érzékelők és környezetek valósághű modellezését.  
-Ebben a projektben a Gazebo biztosítja a TurtleBot3 robot és a pálya szimulációját, így a robot mozgása, szenzorai és a vonalkövetés folyamata anélkül tesztelhető, hogy valódi hardverre lenne szükség.
+A **Gazebo** egy fejlett robotikai szimulációs környezet, amely valósághű fizikai modellezést tesz lehetővé, beleértve robotok mozgását, szenzorait és a környezeti interakciókat.
 
-A Gazebo együttműködik a ROS-szal, így a robot szimulált érzékelőadatai és vezérlése ugyanúgy elérhetők, mintha egy valós roboton dolgoznánk.
+Ebben a projektben a Gazebo a TurtleBot3 robot mozgásának és érzékelőinek szimulációját végzi. A robot egy egyedi pályán halad, ahol a vonalkövetést és színfelismerést valós időben modellezzük.
+
+A pályák `.sdf` (Simulation Description Format) fájlként találhatók meg a következő könyvtárban:
+
+./tb3_project/worlds/
+
+
+A Gazebo szimuláció ROS 2-höz kapcsolódik az alábbiakon keresztül:
+
+- A robot állapotát (pl. odometria) és kameraképet ROS 2 topikokon keresztül továbbítja,
+- Ezek az adatok közvetlenül elérhetők RViz-ben vagy más ROS node-okban (pl. a neurális hálózat feldolgozó moduljában).
+
+A szimuláció automatikusan elindítja a TurtleBot3-at és betölti a vonalas pályát, amely Blenderből exportált `.dae` modellek segítségével lett létrehozva. Ezek a modellek a következő mappában találhatók:
+
+./gazebo_models/
+
+Ez a felépítés lehetővé teszi, hogy a robot valós hardver nélkül is pontosan tesztelhető és fejleszthető legyen.
 
 
 # Projekt felépítése
 
+Két főmappából áll a projekt:
+*tb3_project
+*tb3_project_py
+Az előbbi tartalmazza a launch file-t amivel el tudjuk indítani a szimulácit:
+```bash
+ros2 launch tb3_project simulation.launch
+```
+A Python package-ben található a path_marker node ami a vizualizációban vesz részt és korábban már bemutatásra került. Továbba a line_follower node is itt található ami a következő paranccsal indítható el:
+```bash
+ros2 run tb3_project line_follower_cnn
+```
+vagy
+```bash
+ros2 run tb3_project line_follower_cnn_robot
+```
+(Az utóbbinak nincs vizualizációja)
 
-<!--## Dependenciák
-## Működés -->
-## Vizualizáció
+A tb3_project package tartalmazza továbbá mindent ami szükséges a szimulációhoz.
+A tb3_project_py package ellenben taralmazza még a neurális hálót, a tanító scriptet és a tanító képeket.
 
-#### Mit csinál a neurális hálózat?
+Még egy mappa található a projektben amiben a `.blender` fileok találhatóak.
+
+### Mit csinál a neurális hálózat?
 
 A projektben használt **neurális hálózat** egy képosztályozó modell, amely a robot kameraképéből két dolgot ismer fel:
 
-- **Milyen irányba** kell kormányozni a robotot a vonal követéséhez (pl. egyenesen, balra, jobbra, vagy nincs vonal),
+- **Milyen irányba** kell kormányozni a robotot a vonal követéséhez: egyenesen, balra, jobbra, vagy nincs vonal (forog körbe vonalat keresve),
+
 - **Milyen színű** vonalat lát a kamera (piros, sárga vagy kék).
 
 A hálózat bemenetére a kamera képe kerül, majd a kimenetén egyszerre becsli az irányt és a vonal színét.  
 Az eredmények alapján a robot automatikusan meghatározza, hogyan mozogjon tovább, illetve továbbítja a felismert vonal színét egy külön ROS topikra.
 
-Emellett a kód vizualizálja a hálózat belső rétegeinek úgynevezett **feature map-jeit** is, így betekintést nyerhetsz abba, hogyan dolgozza fel a képet a hálózat.
+A szín hatással van a robot sebességére, kék szín esetén kétszeres, piros esetén félszeres sebességgel megy a sárgához képest.
 
+Emellett a kód vizualizálja a hálózat belső rétegeinek úgynevezett **feature map-jeit** is, így betekintést nyerhetsz abba, hogyan dolgozza fel a képet a hálózat.
 
 A neurális háló tanításról készült kép: 
 
 ![A neurális hálózat tanítása](https://raw.githubusercontent.com/20vencel03/Vonalkovetes-szinfelismeressel-/main/tb3_project_py/network_model/model_training.png)
 
-#### Neurális háló tanításához használt képek
+Első ránézésre nagyon rossznak tűnhet, de mivel a tanító képek egyszerre két információt tartalmaznak (irány és szín), de ennek ellenére csak egy címkét adtunk neki, ezért 50% fölé nem nagyon tud elméletileg sem menni.
+
+### Neurális háló tanításához használt képek
 
 A neurális háló tanításához szükséges képek beszerzése több forrásból történt, melyek kezdetben külön voltak tesztelve, de végül egy kombinált adatbázis került felhasználásra.
 
