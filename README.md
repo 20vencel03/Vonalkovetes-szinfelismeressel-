@@ -138,31 +138,44 @@ A szimuláció automatikusan elindítja a TurtleBot3-at és betölti a vonalas p
 Ez a felépítés lehetővé teszi, hogy a robot valós hardver nélkül is pontosan tesztelhető és fejleszthető legyen.
 
 
-# Projekt felépítése
+## Projekt felépítése
 
-Két főmappából áll a projekt:
-*tb3_project
-*tb3_project_py
-Az előbbi tartalmazza a launch file-t amivel el tudjuk indítani a szimulácit:
-```bash
-ros2 launch tb3_project simulation.launch
-```
-A Python package-ben található a path_marker node ami a vizualizációban vesz részt és korábban már bemutatásra került. Továbba a line_follower node is itt található ami a következő paranccsal indítható el:
-```bash
-ros2 run tb3_project line_follower_cnn
-```
-vagy
-```bash
-ros2 run tb3_project line_follower_cnn_robot
-```
-(Az utóbbinak nincs vizualizációja)
+A projekt három fő mappából áll:
 
-A tb3_project package tartalmazza továbbá mindent ami szükséges a szimulációhoz.
-A tb3_project_py package ellenben taralmazza még a neurális hálót, a tanító scriptet és a tanító képeket.
+- `tb3_project`  
+- `tb3_project_py`  
+- `blender_files`
 
+---
+
+### `tb3_project`
+
+Ez a ROS 2 package tartalmazza a szimuláció elindításához szükséges launch fájlt és továbbá mindent ami szükséges hozzá (Gazebo modellek, Rviz config)
+
+A szimuláció indítása a következő paranccsal történik:
+
+```bash
+ros2 launch tb3_project simulation.launch.py
+```
+### `tb3_project_py`
+
+Ez a Python package tartalmazza a robotvezérlő és vizualizciós node-okat és a neurális hálót.
+
+- A path_marker node felelős a színes pályarajzolásért az RViz vizualizációban (korábban részletezve).
+- A robot irányításáért a követekező node-ok felelnek:
+```bash
+ros2 run tb3_project line_follower_cnn # Vizualizációval
+```
+```bash
+ros2 run tb3_project line_follower_cnn_robot # Valódi robotra, vizualizáció nélkül
+```
+
+A tb3_project_py package továbbá taralmazza még a neurális hálót, a tanító scriptet és a tanító képeket is
+
+### `Tracks`
 Még egy mappa található a projektben amiben a `.blender` fileok találhatóak.
 
-### Mit csinál a neurális hálózat?
+## Mit csinál a neurális hálózat?
 
 A projektben használt **neurális hálózat** egy képosztályozó modell, amely a robot kameraképéből két dolgot ismer fel:
 
@@ -181,7 +194,7 @@ A neurális háló tanításról készült kép:
 
 ![A neurális hálózat tanítása](https://raw.githubusercontent.com/20vencel03/Vonalkovetes-szinfelismeressel-/main/tb3_project_py/network_model/model_training.png)
 
-Első ránézésre nagyon rossznak tűnhet, de mivel a tanító képek egyszerre két információt tartalmaznak (irány és szín), de ennek ellenére csak egy címkét adtunk neki, ezért 50% fölé nem nagyon tud elméletileg sem menni.
+Elsőre a tanítási eredmény alacsonynak tűnhet, azonban mivel a tanító képek egyszerre két információt (irány és szín) hordoznak, miközben a hálózatnak csak egyetlen címkét adtunk meg, elméletileg nem várható, hogy a pontosság a megszokott értékekre emelkedjen.
 
 ### Neurális háló tanításához használt képek
 
@@ -193,9 +206,8 @@ A neurális háló tanításához szükséges képek beszerzése több forrásb�
 
 Végül az első módszerrel szerzett adatbázisának megválogatott verziója került egyesítésre az utolsó megközelítés adatbázisával, ami már így együtt egy kellően stabil neurális hálót eredményezett
 
-
-
 # Eredmények
+
 A projektről futás közben készült videó megtalálható a YouTube-on.
 
 Link: https://youtu.be/CRSvCb_Uejo
