@@ -106,7 +106,7 @@ A neurális háló tanításról készült kép:
 
 ![A neurális hálózat tanítása](https://raw.githubusercontent.com/20vencel03/Vonalkovetes-szinfelismeressel-/main/tb3_project_py/network_model/model_training.png)
 
-#### Neurális hálózat tanításához használt képek
+#### Neurális háló tanításához használt képek
 
 A neurális háló tanításához szükséges képek beszerzése több forrásból történt, melyek kezdetben külön voltak tesztelve, de végül egy kombinált adatbázis került felhasználásra.
 
