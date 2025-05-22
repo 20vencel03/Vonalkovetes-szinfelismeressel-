@@ -3,11 +3,11 @@ from rclpy.node import Node
 from sensor_msgs.msg import CompressedImage, Image
 from cv_bridge import CvBridge
 from geometry_msgs.msg import Twist
+from std_msgs.msg import Int32
 
 from tensorflow.keras.preprocessing.image import img_to_array
 from tensorflow.keras.models import load_model
-from tensorflow.compat.v1 import InteractiveSession
-from tensorflow.compat.v1 import ConfigProto
+from tensorflow.compat.v1 import InteractiveSession, ConfigProto
 from tensorflow.keras import __version__ as keras_version
 import tensorflow as tf
 import h5py
@@ -23,11 +23,8 @@ class ImageSubscriber(Node):
     def __init__(self):
         super().__init__('image_subscriber')
 
-
-        # Set image size
         self.image_size = 24
 
-        # Initialize Tensorflow session
         self.config = ConfigProto()
         self.config.gpu_options.allow_growth = True
         self.session = InteractiveSession(config=self.config)
@@ -39,7 +36,6 @@ class ImageSubscriber(Node):
         print("Keras version: %s" % keras_version_str)
         print("CNN model: %s" % model_path)
 
-        # Fetch the saved Keras version used to produce the file
         model_version = self.get_keras_version_from_keras_file(model_path)
         print("Model's Keras version:", model_version)
 
@@ -47,21 +43,23 @@ class ImageSubscriber(Node):
             print('You are using Keras version ', keras_version_str, ', but the model was built using ', model_version)
             exit()
 
-        # Finally load model:
         self.model = load_model(model_path, custom_objects=None, compile=True, safe_mode=True)
-        self.model.summary()
-
         self.last_time = time.time()
+
+        #self.bridge = CvBridge()
+        #self.latest_frame = None
+        #self.frame_lock = threading.Lock()
+        #self.running = True
 
         self.subscription = self.create_subscription(
             CompressedImage,
-            'image_raw/compressed',  # Replace with your topic name
+            'image_raw/compressed',
             self.image_callback,
-            1  # Queue size of 1
+            1
         )
 
         self.publisher = self.create_publisher(Twist, 'cmd_vel', 10)
-        
+
         # Initialize CvBridge
         self.bridge = CvBridge()
         
@@ -72,7 +70,9 @@ class ImageSubscriber(Node):
         # Flag to control the display loop
         self.running = True
 
-        # Start a separate thread for spinning (to ensure image_callback keeps receiving new frames)
+
+        self.color_publisher = self.create_publisher(Int32, 'line_color', 10)
+
         self.spin_thread = threading.Thread(target=self.spin_thread_func)
         self.spin_thread.start()
 
@@ -108,8 +108,8 @@ class ImageSubscriber(Node):
         # Close OpenCV window after quitting
         self.running = False
 
-    def process_image(self, img):
 
+    def process_image(self, img):
         msg = Twist()
         msg.linear.x = 0.0
         msg.linear.y = 0.0
@@ -123,33 +123,42 @@ class ImageSubscriber(Node):
         image = np.array(image, dtype="float") / 255.0
 
         image = image.reshape(-1, self.image_size, self.image_size, 3)
-        
+
         with tf.device('/gpu:0'):
-            prediction = np.argmax(self.model(image, training=False))
+            prediction_all = self.model(image, training=False)
+            prediction_direction = np.argmax(prediction_all[0][0:4])
+            prediction_color = np.argmax(prediction_all[0][4:7])
 
-        print("Prediction %d, elapsed time %.3f" % (prediction, time.time()-self.last_time))
-        self.last_time = time.time()
+        speed_coeff = [0.5, 1.0, 2.0][prediction_color] if prediction_color in [0,1,2] else 0.0
 
-        if prediction == 0: # Forward
+        if prediction_direction == 0:  # Forward
+            msg.linear.x = 0.08 * speed_coeff
             msg.angular.z = 0.0
-            msg.linear.x = 0.08
-        elif prediction == 1: # Left
+        elif prediction_direction == 1:  # Left
+            msg.linear.x = 0.05 * speed_coeff
             msg.angular.z = -0.3
-            msg.linear.x = 0.05
-        elif prediction == 2: # Right
+        elif prediction_direction == 2:  # Right
+            msg.linear.x = 0.05 * speed_coeff
             msg.angular.z = 0.3
-            msg.linear.x = 0.05
-        else: # Nothing
-            msg.angular.z = 0.2
+        else:  # Nothing
             msg.linear.x = 0.0
+            msg.angular.z = 0.2
 
-        # Publish cmd_vel
         self.publisher.publish(msg)
 
+        color_msg = Int32()
+        color_msg.data = int(prediction_color)
+        self.color_publisher.publish(color_msg)
+
+        color_names = ["Red", "Yellow", "Blue"]
+        print(f"Predicted direction: {prediction_direction}, color: {color_names[prediction_color]}")
+
+        #self.last_time = time.time()
         # Return processed frames
         return
 
-    # Convert to RGB channels
+
+# Convert to RGB channels
     def convert2rgb(self, img):
         R = img[:, :, 2]
         G = img[:, :, 1]
@@ -166,7 +175,7 @@ class ImageSubscriber(Node):
 
         return H, L, S
     
-    # apply a trapezoid polygon mask, size is hardcoded for 640x480px
+   # apply a trapezoid polygon mask, size is hardcoded for 640x480px
     def apply_polygon_mask(self, img):
         mask = np.zeros_like(img)
         ignore_mask_color = 255
@@ -184,6 +193,7 @@ class ImageSubscriber(Node):
 
         return binary*255
 
+
     # Helper to read the .keras file's metadata
     def get_keras_version_from_keras_file(self, path):
         with zipfile.ZipFile(path, 'r') as archive:
@@ -193,6 +203,7 @@ class ImageSubscriber(Node):
                     metadata = json.load(f)
                     return metadata.get('keras_version', 'Unknown')
             return 'Unknown'
+
 
     def stop_robot(self):
         msg = Twist()
