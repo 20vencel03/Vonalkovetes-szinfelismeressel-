@@ -106,6 +106,16 @@ A neurális háló tanításról készült kép:
 
 ![A neurális hálózat tanítása](https://raw.githubusercontent.com/20vencel03/Vonalkovetes-szinfelismeressel-/main/tb3_project_py/network_model/model_training.png)
 
+#### Neurális hálózat tanításához használt képek
+
+A neurális háló tanításához szükséges képek beszerzése több forrásból történt, melyek kezdetben külön voltak tesztelve, de végül egy kombinált adatbázis került felhasználásra.
+
+- Az első megközelítés az órai tanítókép készítő node átalakítása volt olyan módon, hogy az magától, adott időnként készítsen képet. Ezzel a felvételek úgy készültek, hogy a nem neurális hálón alapuló vonalkövető algoritmus, kicsit hangolt változata mozgatta a robotot, az általunk létrehozott színes pályán. Itt a szortírozás kézzel történt. Természetesen nagyon hasznos továbbfejlesztés lett volna, úgy kialakítani a rögzítő programot, hogy az már szortírozzon is egyben, azonban az volt a tapasztalat, hogy ezzel a konfigurációval a robot túl jól haladt végig a pályán, és így, a készült anyag nem volt kellően változatos.
+- Egy másik próbálkozás a kezdetleges hálók felhasználása volt mind mozgatásra és szortírozásra, azonban ez a több hálós módszeren alapul ami elvetésre került, mind erőfrrás igénye, mind pedig nem megbízható működése miatt, így ezen módszerrel végül nem is készült olyan adatbázis ami később felhasználásra került volna.
+- Az utolsó módszer pedig a konzultáción javasolt adatbázis sokszorozás volt. Ami azt jelenti, hogy az eredeti órán használt, jól működő háló tanító képei lettek átdolgozva. Egy python kód megkereste és átszinezte a vonalat a képeken. Az így kapott adatbázisból azonban hiányoztak a színátmenetek, ami miatt a belőle tanított háló színérzékenysége nem volt kellően stabil.
+
+Végül az első módszerrel szerzett adatbázisának megválogatott verziója került egyesítésre az utolsó megközelítés adatbázisával, ami már így együtt egy kellően stabil neurális hálót eredményezett
+
 
 
 # Eredmények
